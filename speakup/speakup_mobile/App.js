@@ -19,7 +19,7 @@ const globalScreenOptions = {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={ROUTES.Loading}
+      <Stack.Navigator initialRouteName={ROUTES.Login}
         screenOptions={globalScreenOptions}>
         <Stack.Screen name={ROUTES.Loading} component={LoadingScreen} />
         <Stack.Screen name={ROUTES.Login} component={LoginScreen} />

@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native'
+// import { createBottomTabNavigator, createAppContainer } from '@react-navigation/native';
 
 const DashboardScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>DASHBOARD SCREEN</Text>
+      <Text>DASHBOARD SCREEN Sucks</Text>
     </View>
   )
 }
