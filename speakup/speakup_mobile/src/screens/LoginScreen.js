@@ -9,11 +9,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import COLORS from "../constants/colors";
+import Roundinput from "../components/Roundinput";
 
 const LoginScreen = () => {
   const [number, onChangeNumber] = React.useState(null);
   const buttonClickedHandler = () => {
     console.log("You have been clicked a button!");
+    // do something
+  };
+  const buttonClickedHandler1 = () => {
+    console.log("You have clicked for registration!");
     // do something
   };
 
@@ -34,13 +39,7 @@ const LoginScreen = () => {
         >
           Speak Up
         </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeNumber}
-          value={number}
-          placeholder="Phone"
-          keyboardType="numeric"
-        />
+        <Roundinput style={styles.input1} placeholder="Phone" kT="numeric" />
       </View>
       <View style={styles.part2}>
         <TouchableOpacity
@@ -49,10 +48,14 @@ const LoginScreen = () => {
         >
           <Text>Login</Text>
         </TouchableOpacity>
-        <Text style={{ color: "grey", fontSize: 20 }}>
-          Don't have an account?
-        </Text>
-        <Text style={{ color: COLORS.GREEN, fontSize: 30 }}>Sign Up</Text>
+        <TouchableOpacity onPress={buttonClickedHandler1}>
+          <Text style={{ color: "grey", fontSize: 20 }}>
+            Don't have an account?
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={buttonClickedHandler1}>
+          <Text style={{ color: COLORS.GREEN, fontSize: 30 }}>Sign Up</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -76,10 +79,10 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: COLORS.WHITE,
   },
-  input: {
+  input1: {
     marginTop: 150,
     textAlign: "center",
-    height: 50,
+    height: 100,
     width: "75%",
     margin: 12,
     borderRadius: 20,

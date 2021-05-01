@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native'
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 // import { createBottomTabNavigator, createAppContainer } from '@react-navigation/native';
 
 const DashboardScreen = () => {
@@ -7,16 +7,16 @@ const DashboardScreen = () => {
     <View style={styles.container}>
       <Text>DASHBOARD SCREEN Sucks</Text>
     </View>
-  )
-}
+  );
+};
 
-export default DashboardScreen
+export default DashboardScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
-})
+});

@@ -1,6 +1,6 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import ROUTES from "./src/constants/routes";
 import COLORS from "./src/constants/colors";
 import DashboardScreen from "./src/screens/DashboardScreen";
@@ -19,8 +19,10 @@ const globalScreenOptions = {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={ROUTES.Login}
-        screenOptions={globalScreenOptions}>
+      <Stack.Navigator
+        initialRouteName={ROUTES.Login}
+        screenOptions={globalScreenOptions}
+      >
         <Stack.Screen name={ROUTES.Loading} component={LoadingScreen} />
         <Stack.Screen name={ROUTES.Login} component={LoginScreen} />
         <Stack.Screen name={ROUTES.Register} component={RegisterScreen} />
