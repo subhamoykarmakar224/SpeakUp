@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
   Image,
+  Button,
   TextInput,
   TouchableOpacity,
 } from "react-native";
 import COLORS from "../constants/colors";
+// import OTPInputView from "@twotalltotems/react-native-otp-input";
 
-const RegisterScreen = () => {
+const VerifyMobileNumber = () => {
   const buttonClickedHandler = () => {
     console.log("You have been clicked a button!");
     // do something
@@ -19,40 +21,52 @@ const RegisterScreen = () => {
       <View style={styles.part1}>
         <Image
           source={require("../../assets/ic_handshake.png")}
-          style={{ width: 100, height: 100, marginTop: 50 }}
+          style={{ width: 100, height: 100, marginTop: 20 }}
         />
         <Text
           style={{
-            paddingTop: 10,
-            fontWeight: "bold",
+            paddingTop: 8,
             fontSize: 25,
             color: COLORS.WHITE,
           }}
         >
-          Register
+          VERIFY MOBILE NUMBER
         </Text>
-
-        <TextInput style={styles.input1} placeholder="Name"></TextInput>
-        <TextInput style={styles.input2} placeholder="Age"></TextInput>
-        <TextInput style={styles.input2} placeholder="Gender"></TextInput>
-        <TextInput style={styles.input2} placeholder="Phone Number"></TextInput>
+        <Text
+          style={{
+            margin: 10,
+            width: "75%",
+            fontSize: 20,
+            color: COLORS.WHITE,
+          }}
+        >
+          OTP has been sent to you on your mobile number. Please enter below.
+        </Text>
+        {/* <OTPInputView pinCount={6} /> */}
       </View>
       <View style={styles.part2}>
         <Text style={{ color: "grey", fontSize: 20, marginTop: 40 }}>
-          Have an account?
+          Remaining Time
         </Text>
-        <TouchableOpacity onPress={buttonClickedHandler}>
-          <Text style={{ color: COLORS.GREEN, fontSize: 30 }}>Sign In</Text>
-        </TouchableOpacity>
+        <Text
+          style={{
+            color: "grey",
+            fontSize: 40,
+            margin: 20,
+            color: COLORS.GREEN,
+          }}
+        >
+          00:00
+        </Text>
         <TouchableOpacity onPress={buttonClickedHandler} style={styles.button}>
-          <Text style={styles.buttonText}>Register</Text>
+          <Text style={styles.buttonText}>Resend OTP</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-export default RegisterScreen;
+export default VerifyMobileNumber;
 
 const styles = StyleSheet.create({
   container: {
@@ -70,25 +84,8 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: COLORS.WHITE,
   },
-  input1: {
-    marginTop: 20,
-    textAlign: "center",
-    height: 40,
-    width: "75%",
-    margin: 10,
-    borderRadius: 20,
-    backgroundColor: COLORS.WHITE,
-  },
-  input2: {
-    textAlign: "center",
-    height: 40,
-    width: "75%",
-    margin: 10,
-    borderRadius: 20,
-    backgroundColor: COLORS.WHITE,
-  },
   button: {
-    marginTop: 100,
+    marginTop: 40,
     backgroundColor: "grey",
     borderRadius: 30,
     width: "75%",
