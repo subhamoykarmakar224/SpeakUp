@@ -4,4 +4,5 @@ export default ROUTES = {
   Register: "register",
   Verify: "verify",
   Dashboard: "dashboard",
+  Search: "search",
 };

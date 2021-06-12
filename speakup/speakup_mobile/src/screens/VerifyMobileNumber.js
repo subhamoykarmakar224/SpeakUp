@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import COLORS from "../constants/colors";
-// import OTPInputView from "@twotalltotems/react-native-otp-input";
+import OTPInputView from "@twotalltotems/react-native-otp-input";
 
 const VerifyMobileNumber = () => {
   const buttonClickedHandler = () => {
@@ -42,7 +42,7 @@ const VerifyMobileNumber = () => {
         >
           OTP has been sent to you on your mobile number. Please enter below.
         </Text>
-        {/* <OTPInputView pinCount={6} /> */}
+        <OTPInputView pinCount={6} />
       </View>
       <View style={styles.part2}>
         <Text style={{ color: "grey", fontSize: 20, marginTop: 40 }}>

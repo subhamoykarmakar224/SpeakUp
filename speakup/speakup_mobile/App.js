@@ -8,6 +8,8 @@ import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import LoadingScreen from "./src/screens/LoadingScreen";
 import VerifyMobileNumber from "./src/screens/VerifyMobileNumber";
+import SearchScreen from "./src/screens/SearchScreen";
+import TaskScreen from "./src/screens/TaskScreen";
 
 const Stack = createStackNavigator();
 
@@ -21,7 +23,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={ROUTES.Verify}
+        initialRouteName={ROUTES.Task}
         screenOptions={globalScreenOptions}
       >
         <Stack.Screen name={ROUTES.Loading} component={LoadingScreen} />
@@ -29,6 +31,8 @@ export default function App() {
         <Stack.Screen name={ROUTES.Register} component={RegisterScreen} />
         <Stack.Screen name={ROUTES.Dashboard} component={DashboardScreen} />
         <Stack.Screen name={ROUTES.Verify} component={VerifyMobileNumber} />
+        <Stack.Screen name={ROUTES.Search} component={SearchScreen} />
+        <Stack.Screen name={ROUTES.Task} component={TaskScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
