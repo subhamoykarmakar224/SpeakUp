@@ -1,21 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native'
+import ScreenContainer from "../screens/ScreenContainer";
+import { AuthContext } from "../constants/context";
 
 const RegisterScreen = () => {
+  const { signUp } = useContext(AuthContext);
   return (
-    <View style={styles.container}>
+    <ScreenContainer>
       <Text>REGISTER SCREEN</Text>
-    </View>
+    </ScreenContainer>
   )
 }
 
 export default RegisterScreen
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})

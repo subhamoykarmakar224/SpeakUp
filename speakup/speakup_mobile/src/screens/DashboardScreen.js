@@ -1,21 +1,16 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useContext } from 'react';
+import { Text } from 'react-native'
+import ScreenContainer from "../screens/ScreenContainer";
+import { AuthContext } from "../constants/context";
 
 const DashboardScreen = () => {
+  const { signOut } = useContext(AuthContext);
+  
   return (
-    <View style={styles.container}>
+    <ScreenContainer style={styles.container}>
       <Text>DASHBOARD SCREEN</Text>
-    </View>
+    </ScreenContainer>
   )
 }
 
 export default DashboardScreen
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
