@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import COLORS from "./src/constants/colors";
 
@@ -46,15 +47,17 @@ export default function App() {
     }, 3000);
   }, []);
 
-  if(isLoading) {
+  if (isLoading) {
     return <SplashScreen />
   }
 
   return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        <RootStackScreen userToken={userToken} />
-      </NavigationContainer>
-    </AuthContext.Provider>
+    <SafeAreaProvider>
+      <AuthContext.Provider value={authContext}>
+        <NavigationContainer>
+          <RootStackScreen userToken={userToken} />
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </SafeAreaProvider>
   );
 }
