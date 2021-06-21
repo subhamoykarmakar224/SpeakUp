@@ -1,15 +1,12 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import ROUTES from "./src/constants/routes";
+import React, { useState, useMemo, useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import COLORS from "./src/constants/colors";
-import DashboardScreen from "./src/screens/DashboardScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import RegisterScreen from "./src/screens/RegisterScreen";
-import LoadingScreen from "./src/screens/LoadingScreen";
-import VerifyMobileNumber from "./src/screens/VerifyMobileNumber";
-import SearchScreen from "./src/screens/SearchScreen";
-import TaskScreen from "./src/screens/TaskScreen";
+
+import { AuthContext } from "./src/constants/context";
+import SplashScreen from "./src/screens/SplashScreen";
+import RootStackScreen from "./src/navigation/RootStack";
 
 const Stack = createStackNavigator();
 
@@ -20,20 +17,44 @@ const globalScreenOptions = {
 };
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [userToken, setUserToken] = useState('asdf');
+
+  const authContext = useMemo(() => {
+    return {
+      signIn: () => {
+        // TODO :: get user token from firebase
+        setIsLoading(false);
+        setUserToken('user_token_firebase');
+      },
+      signUp: () => {
+        // TODO :: get user token from firebase
+        setIsLoading(false);
+        setUserToken('user_token_firebase');
+      },
+      signOut: () => {
+        setIsLoading(false);
+        setUserToken(null);
+      },
+    };
+  }, []);
+
+  // TODO :: Delete this later when firebase authentication done
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
+
+  if(isLoading) {
+    return <SplashScreen />
+  }
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName={ROUTES.Task}
-        screenOptions={globalScreenOptions}
-      >
-        <Stack.Screen name={ROUTES.Loading} component={LoadingScreen} />
-        <Stack.Screen name={ROUTES.Login} component={LoginScreen} />
-        <Stack.Screen name={ROUTES.Register} component={RegisterScreen} />
-        <Stack.Screen name={ROUTES.Dashboard} component={DashboardScreen} />
-        <Stack.Screen name={ROUTES.Verify} component={VerifyMobileNumber} />
-        <Stack.Screen name={ROUTES.Search} component={SearchScreen} />
-        <Stack.Screen name={ROUTES.Task} component={TaskScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        <RootStackScreen userToken={userToken} />
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
