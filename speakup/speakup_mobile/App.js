@@ -8,6 +8,8 @@ import COLORS from "./src/constants/colors";
 import { AuthContext } from "./src/constants/context";
 import SplashScreen from "./src/screens/SplashScreen";
 import RootStackScreen from "./src/navigation/RootStack";
+import { AsyncStorageSetData, AsyncStorageGetData } from "./src/utils/AsyncStorage";
+import KEYS from "./src/constants/KEYS";
 
 const Stack = createStackNavigator();
 
@@ -23,19 +25,23 @@ export default function App() {
 
   const authContext = useMemo(() => {
     return {
-      signIn: () => {
+      signIn: (verificationId) => {
         // TODO :: get user token from firebase
         setIsLoading(false);
-        setUserToken('user_token_firebase');
+        setUserToken(verificationId);
+        AsyncStorageSetData(KEYS.KEY_FB_AUTH_TOKEN, verificationId);
       },
-      signUp: () => {
+      signUp: (verificationId) => {
         // TODO :: get user token from firebase
         setIsLoading(false);
-        setUserToken('user_token_firebase');
+        setUserToken(verificationId);
+        console.log(verificationId);
+        AsyncStorageSetData(KEYS.KEY_FB_AUTH_TOKEN, verificationId);
       },
       signOut: () => {
         setIsLoading(false);
         setUserToken(null);
+        AsyncStorageSetData(KEYS.KEY_FB_AUTH_TOKEN, "");
       },
     };
   }, []);
@@ -43,7 +49,13 @@ export default function App() {
   // TODO :: Delete this later when firebase authentication done
   useEffect(() => {
     setTimeout(() => {
+      // TODO :: Check if authToken is not null
+      var token = AsyncStorageGetData(KEYS.KEY_FB_AUTH_TOKEN);
+      if(!token) {
+        setUserToken(token);
+      }
       setIsLoading(false);
+      console.log(`UserToken: ${JSON.stringify(token)}`)
     }, 3000);
   }, []);
 

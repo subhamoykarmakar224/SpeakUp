@@ -1,51 +1,87 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Animated } from 'react-native'
+import React, { useContext, useState, useRef } from 'react';
+import { Keyboard, StyleSheet, Text, View, Animated } from 'react-native'
 import ScreenContainer from "../screens/ScreenContainer";
 import { AuthContext } from "../constants/context";
 import { Input, Button } from "react-native-elements";
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
-
+import firebaseApp from "../constants/firebase";
+import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 
 
 const RegisterScreen = ({ navigation }) => {
   const { signUp } = useContext(AuthContext);
 
+  // Firebase
+  const recaptchaVerifier = useRef(null);
+  const [verificationId, setVerificationId] = useState();
+  const firebaseConfig = firebaseApp.apps.length ? firebaseApp.app().options : undefined;
+
+  // Others
   const [name, setName] = useState("");
   const [stdCode, setStdCode] = useState('(+1) USA');
   const [phoneNumber, setPhoneNumber] = useState("9876543211");
+  const [isbtnRegisterEnabled, setIsbtnRegisterEnabled] = useState(true);
   const [otp, setOtp] = useState("");
   const [otpInputVisibility, setOtpInputVisibility] = useState(false);
   const [btnOtpSendText, setBtnOtpSendText] = useState("Verify OTP");
   const [timerIsRunning, setTimerIsRunning] = useState(false);
-  const countDownTime = 10;
+  const countDownTime = 90;
 
-  const btnRegisterClicked = () => {
+  const extractOnlyStdCode = (s) => stdCode.substring(1, stdCode.indexOf(')'));
+
+  // Functions
+  const btnRegisterClicked = async () => {
+    Keyboard.dismiss();
+    setIsbtnRegisterEnabled(false);
     setOtpInputVisibility(true);
-    // TODO :: disable Register button
-
-    // TODO :: start timer
     setTimerIsRunning(true);
 
+    // TODO :: Disable the phone number intput
+
     // TODO :: Firebase
+    try {
+      const phoneProvider = new firebaseApp.auth.PhoneAuthProvider();
+      const verificationId = await phoneProvider.verifyPhoneNumber(
+        extractOnlyStdCode(stdCode).concat(phoneNumber),
+        recaptchaVerifier.current
+      );
+      setVerificationId(verificationId);
+      alert("Verification code has been sent to your phone.");
+    } catch (err) {
+      alert(`Error: ${err.message}`);
+    }
   };
 
   const onTimerComplete = () => {
     setBtnOtpSendText('Resend OTP');
   };
 
-  const btnOtpSendTextFunc = () => {
-    if(btnOtpSendText == 'Resend OTP') {
+  const btnOtpSendTextFunc = async () => {
+    if (btnOtpSendText == 'Resend OTP') {
       setBtnOtpSendText('Verify OTP');
       // TODO :: Resend SMS for OTP
       alert("Request for OTP resent.");
-    } else if(btnOtpSendText == 'Verify OTP') {
-      // TODO :: Verify OTP
-      alert("Verify OTP.");
+    } else if (btnOtpSendText == 'Verify OTP') {
+      try {
+        const credential = firebaseApp.auth.PhoneAuthProvider.credential(
+          verificationId,
+          otp
+        );
+        await firebaseApp.auth().signInWithCredential(credential);
+        alert(`Phone authentication successful`);
+        signUp(JSON.stringify(verificationId));
+      } catch (err) {
+        alert(`Error: ${err.message}`);
+      }
     }
   };
 
   return (
     <ScreenContainer>
+      <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifier}
+        firebaseConfig={firebaseConfig}
+      />
       <Button
         icon={{
           type: 'material-icons', name: "chevron-left", size: 20, color: "#1DA1F2"
@@ -68,6 +104,7 @@ const RegisterScreen = ({ navigation }) => {
           leftIcon={{ type: 'material-icons', name: 'phone' }}
           keyboardType="numeric"
           value={phoneNumber}
+          autoFocus
           onChangeText={(n) => setPhoneNumber(n)}
         />
 
@@ -81,6 +118,7 @@ const RegisterScreen = ({ navigation }) => {
         <Button
           title="Register"
           onPress={btnRegisterClicked}
+          disabled={!isbtnRegisterEnabled}
         />
         {otpInputVisibility ?
           <View style={styles.otpView}>
@@ -88,6 +126,7 @@ const RegisterScreen = ({ navigation }) => {
               style={styles.otpInput}
               placeholder='******'
               value={otp}
+              disabled={!verificationId}
               onChangeText={(n) => setOtp(n)}
             />
 

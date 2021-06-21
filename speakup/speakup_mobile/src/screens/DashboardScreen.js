@@ -7,7 +7,7 @@ const DashboardScreen = () => {
   const { signOut } = useContext(AuthContext);
   
   return (
-    <ScreenContainer style={styles.container}>
+    <ScreenContainer>
       <Text>DASHBOARD SCREEN</Text>
     </ScreenContainer>
   )
