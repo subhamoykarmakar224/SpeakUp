@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import {  StyleSheet, Text, View } from "react-native";
 
 const TaskScreen = () => {
   return (
     <View>
-      <Text></Text>
+      <Text> asdasdas</Text>
     </View>
   );
 };

@@ -5,4 +5,5 @@ export default ROUTES = {
   Verify: "verify",
   Dashboard: "dashboard",
   Search: "search",
+  Task: "task"
 };
