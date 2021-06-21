@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import ScreenContainer from "../screens/ScreenContainer";
 
 const TaskScreen = () => (
-  <ScreenContainer style={styles.container}>
+  <ScreenContainer >
     <Text>TASK SCREEN</Text>
   </ScreenContainer>
 )

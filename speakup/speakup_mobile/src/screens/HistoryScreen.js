@@ -3,7 +3,7 @@ import { Text } from 'react-native'
 import ScreenContainer from "../screens/ScreenContainer";
 
 const HistoryScreen = () => (
-  <ScreenContainer style={styles.container}>
+  <ScreenContainer>
     <Text>HISTORY SCREEN</Text>
   </ScreenContainer>
 )
