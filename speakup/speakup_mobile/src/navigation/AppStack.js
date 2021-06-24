@@ -48,13 +48,28 @@ const ProfileStackScreen = () => (
 
 const AppStack = () => (
     <Tabs.Navigator headerMode="none">
+        
+        <Tabs.Screen name={ROUTES.Task} component={TaskStackScreen}
+            options={{
+                title: ROUTES_TITLE.Task,
+                /*tabBarIcon: ({focused, color, size}) => (
+                    <Image
+                      source={
+                        focused
+                          ? require('./assets/task.svg')
+                          : require('./assets/favicon.png')
+                      }
+                      style={{
+                        width: size,
+                        height: size,
+                        borderRadius: size,
+                      }}
+                    />
+                  ),*/
+            }} />
         <Tabs.Screen name={ROUTES.Dashboard} component={DashboardStackScreen}
             options={{
                 title: ROUTES_TITLE.Dashboard
-            }} />
-        <Tabs.Screen name={ROUTES.Task} component={TaskStackScreen}
-            options={{
-                title: ROUTES_TITLE.Task
             }} />
         <Tabs.Screen name={ROUTES.Search} component={SearchStackScreen}
             options={{
