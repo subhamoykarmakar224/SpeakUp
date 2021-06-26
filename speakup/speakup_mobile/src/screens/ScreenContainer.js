@@ -11,13 +11,5 @@ export default ScreenContainer
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // alignItems: 'center',
-        // justifyContent: 'center',
     },
-    // button: {
-        // paddingHorizontal: 20,
-        // paddingVertical: 20,
-        // marginVertical: 10,
-        // borderRadius: 5,
-    // }
 })

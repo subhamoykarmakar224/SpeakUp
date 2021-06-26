@@ -4,6 +4,7 @@ export default COLORS = {
   GREEN: "#01B06B",
   RED: "#F44336",
   YELLOW: "#FBC02D",
+  GREY: "#808080",
   TEXT_HEADER: "#7B7B7B",
   TEXT_BODY: "#C1C1C1",
 };

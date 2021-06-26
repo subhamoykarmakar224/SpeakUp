@@ -7,6 +7,8 @@ export default ROUTES = {
   Verify: "verify",
   Dashboard: "dashboard",
   Task: "task",
+  TaskAudio: "task_audio",
+  TaskVideo: "task_video",
   Search: "search",
   History: "history",
   Profile: "profile",
