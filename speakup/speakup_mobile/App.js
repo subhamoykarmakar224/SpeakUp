@@ -29,13 +29,14 @@ export default function App() {
         // TODO :: get user token from firebase
         setIsLoading(false);
         setUserToken(verificationId);
+        console.log(`UserToken signUp(): ${verificationId}`);
         AsyncStorageSetData(KEYS.KEY_FB_AUTH_TOKEN, verificationId);
       },
       signUp: (verificationId) => {
         // TODO :: get user token from firebase
         setIsLoading(false);
         setUserToken(verificationId);
-        console.log(verificationId);
+        console.log(`UserToken signUp(): ${verificationId}`);
         AsyncStorageSetData(KEYS.KEY_FB_AUTH_TOKEN, verificationId);
       },
       signOut: () => {
@@ -55,7 +56,7 @@ export default function App() {
         setUserToken(token);
       }
       setIsLoading(false);
-      console.log(`UserToken: ${JSON.stringify(token)}`)
+      console.log(`UserToken useEffect(): ${JSON.stringify(token)}`)
     }, 3000);
   }, []);
 

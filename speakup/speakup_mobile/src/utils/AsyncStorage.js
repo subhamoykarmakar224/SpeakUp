@@ -7,6 +7,3 @@ export async function AsyncStorageSetData(key, value){
 export async function AsyncStorageGetData(key){
     await SecureStore.getItemAsync(key);
 }
-
-// export default { AsyncStorageSetData, AsyncStorageGetData };
-
