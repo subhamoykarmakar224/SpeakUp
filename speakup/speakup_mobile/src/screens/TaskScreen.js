@@ -50,7 +50,7 @@ const tasks = [
 
 const styling = {
   red: { color: "red" },
-  yellow: { color: "yellow" },
+  yellow: { color: "darkorange" },
   green: { color: "green" },
 };
 
@@ -83,3 +83,9 @@ const TaskScreen = ({ navigation }) => (
 );
 
 export default TaskScreen;
+
+const styles = StyleSheet.create({
+  container: {
+      flex: 1
+  }
+})
